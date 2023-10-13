@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 
 function configureStore() {
-  return createStore(compose());
+    return createStore(compose());
 }
 
 export default configureStore();
