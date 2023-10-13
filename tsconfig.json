@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react",
+		"target": "es2022",
+		"module": "es2015",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"strict": true,
+	},
+	"exclude": ["dist/**/*", "node_modules/**/*"]
+}
