@@ -1,0 +1,8 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "jsdom",
+  "moduleNameMapper": {
+    "^Components(.*)$": "<rootDir>/src/components/$1",
+    "^Pages(.*)$": "<rootDir>/src/pages/$1"
+  }
+}

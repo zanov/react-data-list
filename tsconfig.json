@@ -4,10 +4,17 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "target": "es2022",
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "src/*": ["./src/*"],
+      "Components/*": ["./src/components/*"],
+      "Pages/*": ["./src/pages/*"]
+    },
+    "lib": ["dom", "esnext"],
+    "esModuleInterop": true
   },
   "exclude": ["dist/**/*", "node_modules/**/*"]
 }

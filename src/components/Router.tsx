@@ -1,9 +1,9 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Layout from './Outlet';
-import DataListPage from 'src/components/pages/DataListPage';
-import DetailsDataPage from 'src/components/pages/DetailsDataPage';
-import PageNotFound from 'src/components/pages/PageNotFound';
+import DataListPage from 'Pages/DataListPage';
+import DetailsDataPage from 'Pages/DetailsDataPage';
+import PageNotFound from 'Pages/PageNotFound';
 
 const Router = () => (
   <Routes>

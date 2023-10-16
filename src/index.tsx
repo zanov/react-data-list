@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
-import App from 'src/components/App';
-import store from 'src/configureStore';
+import App from 'Components/App';
+import store from './configureStore';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
