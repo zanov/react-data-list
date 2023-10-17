@@ -10,11 +10,20 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'public/index.html',
     }),
   ],
   devServer: {
+    static: {
+      directory: path.join(__dirname, './public'),
+    },
+    compress: true,
     port: 3030,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+      },
+    },
   },
   module: {
     rules: [

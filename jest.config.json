@@ -3,6 +3,7 @@
   "testEnvironment": "jsdom",
   "moduleNameMapper": {
     "^Components(.*)$": "<rootDir>/src/components/$1",
-    "^Pages(.*)$": "<rootDir>/src/pages/$1"
+    "^Pages(.*)$": "<rootDir>/src/pages/$1",
+    "^Redux(.*)$": "<rootDir>/src/redux/$1"
   }
 }

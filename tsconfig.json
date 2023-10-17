@@ -11,9 +11,9 @@
     "paths": {
       "src/*": ["./src/*"],
       "Components/*": ["./src/components/*"],
-      "Pages/*": ["./src/pages/*"]
+      "Pages/*": ["./src/pages/*"],
+      "Redux/*": ["./src/redux/*"]
     },
-    "lib": ["dom", "esnext"],
     "esModuleInterop": true
   },
   "exclude": ["dist/**/*", "node_modules/**/*"]
