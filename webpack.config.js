@@ -6,6 +6,7 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, './dist'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
   plugins: [
@@ -17,6 +18,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, './public'),
     },
+    historyApiFallback: true,
     compress: true,
     port: 3030,
     proxy: {
@@ -24,6 +26,7 @@ module.exports = {
         target: 'http://localhost:3001',
       },
     },
+    open: true,
   },
   module: {
     rules: [

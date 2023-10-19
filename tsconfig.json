@@ -12,7 +12,8 @@
       "src/*": ["./src/*"],
       "Components/*": ["./src/components/*"],
       "Pages/*": ["./src/pages/*"],
-      "Redux/*": ["./src/redux/*"]
+      "Redux/*": ["./src/redux/*"],
+      "Interfaces/*": ["./src/interfaces/*"]
     },
     "esModuleInterop": true
   },

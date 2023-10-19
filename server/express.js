@@ -13,14 +13,21 @@ app.get('/api/get-data', (req, res) => {
 });
 
 app.get('/api/data-items/:id', (req, res) => {
-  const itemId = parseInt(req.params.id);
-  const item = data.payment_transactions.find((transaction) => transaction.id === itemId);
+  fs.readFile(`${__dirname}/data.json`, 'utf8', (err, data) => {
+    if (err) {
+      res.status(500).send('Error reading data file.');
+    } else {
+      const itemId = parseInt(req.params.id);
+      const parsedData = JSON.parse(data);
+      const item = parsedData.payment_transactions.find((transaction) => transaction.id === itemId);
 
-  if (item) {
-    res.json(item);
-  } else {
-    res.status(404).json({message: 'Item not found'});
-  }
+      if (item) {
+        return res.json(item);
+      } else {
+        res.status(404).json({message: 'Item not found'});
+      }
+    }
+  });
 });
 
 app.listen(3001, () => {

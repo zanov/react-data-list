@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import {FETCH_ALL_ITEMS_SUCCESS, FETCH_ITEM_BY_ID} from 'Redux/actions';
+import {FETCH_ALL_ITEMS_SUCCESS, FETCH_ITEM_BY_ID_SUCCESS} from 'Redux/actions';
 
 const initialState = {
   items: [],
-  selectedItem: null,
+  selectedItem: {},
 };
 
 const dataReducer = (state = initialState, action: any) => {
@@ -13,10 +13,10 @@ const dataReducer = (state = initialState, action: any) => {
         ...state,
         items: action.payload,
       };
-    case FETCH_ITEM_BY_ID:
+    case FETCH_ITEM_BY_ID_SUCCESS:
       return {
         ...state,
-        selectedItem: state.items.find((item) => item.id === action.payload),
+        selectedItem: action.payload,
       };
     default:
       return state;
@@ -27,6 +27,4 @@ const rootReducer = combineReducers({
   dataReducer,
 });
 
-export default (state: any, action: any) => {
-  return rootReducer(state, action);
-};
+export default rootReducer;

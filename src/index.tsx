@@ -8,9 +8,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+  <React.Suspense>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </React.Suspense>,
 );
