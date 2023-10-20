@@ -1,12 +1,15 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {fetchItem} from 'src/redux/actions';
+import type {RootState, AppDispatch} from 'Redux/configureStore';
 
 const DetailsDataPage = () => {
-  let {itemId} = useParams();
-  const selectedItemState: any = useSelector((state) => state?.dataReducer?.selectedItem);
-  const dispatch = useDispatch();
+  const {itemId} = useParams();
+  const selectedItemState: TypedUseSelectorHook<RootState> = useSelector(
+    (state: any) => state?.dataReducer?.selectedItem,
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchItem(itemId));

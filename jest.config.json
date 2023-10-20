@@ -2,6 +2,7 @@
   "preset": "ts-jest",
   "testEnvironment": "jsdom",
   "moduleNameMapper": {
+    "^src(.*)$": "<rootDir>/src/$1",
     "^Components(.*)$": "<rootDir>/src/components/$1",
     "^Pages(.*)$": "<rootDir>/src/pages/$1",
     "^Redux(.*)$": "<rootDir>/src/redux/$1",

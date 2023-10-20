@@ -15,7 +15,8 @@
       "Redux/*": ["./src/redux/*"],
       "Interfaces/*": ["./src/interfaces/*"]
     },
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "exclude": ["dist/**/*", "node_modules/**/*"]
 }

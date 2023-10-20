@@ -1,12 +1,12 @@
 import {Itransaction} from 'src/interfaces/interfaces';
 
-export enum ErrorClass {
+export enum errorClass {
   'Module::SystemError' = 'System',
   'Module::RemoteError' = 'Remote',
   'Module::ConfigurationError' = 'Unknown',
 }
 
-export enum TransactionType {
+export enum transactionType {
   'SaleTransaction' = 'Sale',
   'Sale3dTransaction' = 'Sale3d',
   'AuthorizeTransaction' = 'Authorize',
@@ -38,3 +38,21 @@ export const sortableColumns = [
   'card_number',
   'amount',
 ];
+
+export const filterOptions = {
+  columns: [
+    'id',
+    'status',
+    'merchant_name',
+    'terminal_name',
+    'type',
+    'error_class',
+    'error_message',
+    'card_holder',
+    'card_number',
+    'amount',
+    'currency',
+    'created_at',
+  ],
+  matchTypes: ['equal', 'starts with', 'ends with', 'contains', 'date-range'],
+};
