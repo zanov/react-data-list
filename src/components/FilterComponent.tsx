@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {applyFilters} from 'Redux/actions';
 
@@ -30,7 +30,7 @@ const FilterComponent = () => {
     (filter) => !newFilters.some((newFilter: {column: string}) => newFilter.column === filter),
   );
 
-  const addFilter = () => {
+  const addFilter = useCallback(() => {
     if (selectedFilter) {
       const newFilter = {
         column: selectedFilter,
@@ -42,21 +42,27 @@ const FilterComponent = () => {
       setFilterValue('');
       setMatchBy('equal');
     }
-  };
+  }, [selectedFilter, matchBy, filterValue, newFilters]);
 
-  const removeFilter = (index: number) => {
-    const updatedFilters = newFilters.filter((_: any, i: number) => i !== index);
-    setNewFilters(updatedFilters);
-  };
+  const removeFilter = useCallback(
+    (index: number) => {
+      const updatedFilters = newFilters.filter((_: any, i: number) => i !== index);
+      setNewFilters(updatedFilters);
+    },
+    [newFilters],
+  );
 
-  const updateFilter = (index: number, key: string, value: string) => {
-    const updatedFilters = newFilters.map((filter: any, i: number) =>
-      i === index ? {...filter, [key]: value} : filter,
-    );
-    setNewFilters(updatedFilters);
-  };
+  const updateFilter = useCallback(
+    (index: number, key: string, value: string) => {
+      const updatedFilters = newFilters.map((filter: any, i: number) =>
+        i === index ? {...filter, [key]: value} : filter,
+      );
+      setNewFilters(updatedFilters);
+    },
+    [newFilters],
+  );
 
-  const applyFiltersToItems = () => {
+  const applyFiltersToItems = useCallback(() => {
     const filters: any = [...newFilters];
 
     if (fromDate && toDate) {
@@ -69,7 +75,7 @@ const FilterComponent = () => {
     }
 
     dispatch(applyFilters(filters));
-  };
+  }, [newFilters, fromDate, toDate, dispatch]);
 
   return (
     <div className='container-xl mt-3'>

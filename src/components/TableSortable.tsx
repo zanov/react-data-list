@@ -1,4 +1,4 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useState, useMemo} from 'react';
 import {Itransaction} from 'Interfaces/interfaces';
 import {sortableColumns} from 'src/utils/constants';
 import TableRow from 'Components/TableRow';
@@ -23,15 +23,18 @@ const TableSortable = memo(function TableList({items, sortable = true, ...props}
     setSort({key, direction});
   };
 
-  const sortedData = [...items].sort((a, b) => {
-    if (sort.direction === 'asc') {
-      return a[sort.key].localeCompare(b[sort.key]);
-    }
-    if (sort.direction === 'desc') {
-      return b[sort.key].localeCompare(a[sort.key]);
-    }
-    return null;
-  });
+  const sortedData = useMemo(() => {
+    if (!sort.key) return items;
+    return [...items].sort((a, b) => {
+      if (sort.direction === 'asc') {
+        return a[sort.key].localeCompare(b[sort.key]);
+      }
+      if (sort.direction === 'desc') {
+        return b[sort.key].localeCompare(a[sort.key]);
+      }
+      return 0;
+    });
+  }, [items, sort]);
 
   return (
     <table className='table'>
@@ -51,13 +54,9 @@ const TableSortable = memo(function TableList({items, sortable = true, ...props}
         </tr>
       </thead>
       <tbody>
-        {sortable === true
-          ? sortedData.map((item: Itransaction) => (
-              <TableRow key={item.id} rowColumns={props.tableFields} {...item} />
-            ))
-          : items.map((item: Itransaction) => (
-              <TableRow key={item.id} rowColumns={props.tableFields} {...item} />
-            ))}
+        {sortedData.map((item: Itransaction) => (
+          <TableRow key={item.id} rowColumns={props.tableFields} {...item} />
+        ))}
       </tbody>
     </table>
   );
