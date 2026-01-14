@@ -1,4 +1,5 @@
 import {Itransaction} from 'src/interfaces/interfaces';
+import apiService from 'src/services/apiService';
 
 export const FETCH_ALL_ITEMS_BEGIN = 'FETCH_ALL_ITEMS_BEGIN';
 export const FETCH_ALL_ITEMS_SUCCESS = 'FETCH_ALL_ITEMS_SUCCESS';
@@ -51,8 +52,8 @@ export const fetchAllItems = (filters = {}) => {
 
     const data = {...filters};
 
-    return fetch('/api/get-data')
-      .then((response) => response.json())
+    return apiService
+      .getAllData()
       .then((data) => {
         dispatch(fetchAllItemsSuccess(data));
       })
@@ -68,14 +69,14 @@ export const fetchItem = (id: any) => {
   return (dispatch: any) => {
     dispatch(fetchItemBegin());
 
-    return fetch(`/api/data-items/${id}`)
-      .then((response) => response.json())
+    return apiService
+      .getDataItem(id)
       .then((item) => {
         dispatch(fetchItemSuccess(item));
       })
       .catch((err) => {
         dispatch(fetchItemFailure(err));
-        console.error('Error fetching patment info:', err);
+        console.error('Error fetching payment info:', err);
         return Promise.reject(err);
       });
   };

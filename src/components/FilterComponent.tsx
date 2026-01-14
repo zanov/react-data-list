@@ -30,17 +30,34 @@ const FilterComponent = () => {
     (filter) => !newFilters.some((newFilter: {column: string}) => newFilter.column === filter),
   );
 
-  const applyFiltersToItems = () => {
-    const filters: any = [...newFilters];
-
+  const addFilter = () => {
     if (selectedFilter) {
       const newFilter = {
         column: selectedFilter,
         matchBy,
         value: filterValue,
       };
-      filters.push(newFilter);
+      setNewFilters([...newFilters, newFilter]);
+      setSelectedFilter('');
+      setFilterValue('');
+      setMatchBy('equal');
     }
+  };
+
+  const removeFilter = (index: number) => {
+    const updatedFilters = newFilters.filter((_: any, i: number) => i !== index);
+    setNewFilters(updatedFilters);
+  };
+
+  const updateFilter = (index: number, key: string, value: string) => {
+    const updatedFilters = newFilters.map((filter: any, i: number) =>
+      i === index ? {...filter, [key]: value} : filter,
+    );
+    setNewFilters(updatedFilters);
+  };
+
+  const applyFiltersToItems = () => {
+    const filters: any = [...newFilters];
 
     if (fromDate && toDate) {
       const dateRangeFilter = {
@@ -79,6 +96,47 @@ const FilterComponent = () => {
             />
           </div>
         </div>
+        <div className='col-md-6 mb-2'>
+          <button className='btn btn-primary' onClick={applyFiltersToItems}>
+            Apply Filters
+          </button>
+        </div>
+      </div>
+      {newFilters.map((filter: any, index: number) => (
+        <div key={index} className='row mb-2'>
+          <div className='col-md-3'>
+            <span className='form-control-plaintext'>{filter.column}</span>
+          </div>
+          <div className='col-md-2'>
+            <select
+              className='form-select'
+              value={filter.matchBy}
+              onChange={(e) => updateFilter(index, 'matchBy', e.target.value)}
+            >
+              {matchOptions.map((match) => (
+                <option key={match} value={match}>
+                  {match}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className='col-md-3'>
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Enter a value'
+              value={filter.value}
+              onChange={(e) => updateFilter(index, 'value', e.target.value)}
+            />
+          </div>
+          <div className='col-md-1'>
+            <button className='btn btn-danger' onClick={() => removeFilter(index)}>
+              Remove
+            </button>
+          </div>
+        </div>
+      ))}
+      <div className='row mb-2'>
         <div className='col-md-2 mb-2'>
           <select
             className='form-select'
@@ -117,13 +175,13 @@ const FilterComponent = () => {
                 onChange={(e) => setFilterValue(e.target.value)}
               />
             </div>
+            <div className='col-md-1 mb-2'>
+              <button className='btn btn-secondary' onClick={addFilter}>
+                Add
+              </button>
+            </div>
           </>
         )}
-        <div className='col-md-2'>
-          <button className='btn btn-primary' onClick={applyFiltersToItems}>
-            Apply Filters
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -29,6 +29,12 @@ export const applyFiltersToItems = (items: Itransaction[], filters: []): Itransa
         case 'contains':
           return itemValue.includes(value);
 
+        case 'daterange':
+          const from = new Date(value.from);
+          const to = new Date(value.to);
+          const itemDate = new Date(itemValue);
+          return itemDate >= from && itemDate <= to;
+
         default:
           return true;
       }
@@ -43,7 +49,7 @@ export const formatData = (items: Itransaction[]) => {
     item.type = transactionType[item.type];
     item.error_class = errorClass[item.error_class];
     item.amount = formatAmount(item.amount, item.currency);
-    item.created_at = moment(item.created_at).format('DD-MM-YY HH:mm');
+    // item.created_at = moment(item.created_at).format('YY-MM-DD HH:mm'); // remove formatting for filtering
     return item;
   });
 };

@@ -12,7 +12,16 @@ const DataListPage = () => {
   );
   const dispatch = useDispatch<AppDispatch>();
 
-  const tableHeaders = Object.keys(sampleTransaction);
+  const tableHeaders = [
+    'status',
+    'created_at',
+    'merchant_name',
+    'type',
+    'error_class',
+    'card_holder',
+    'card_number',
+    'amount',
+  ];
 
   useEffect(() => {
     dispatch(fetchAllItems());
